@@ -31,7 +31,7 @@ public class userServiceImpl implements userService {
                     throw new IllegalArgumentException("Invalid user role");
             }
 
-            copy(userDetails, details);
+            copyFields(userDetails, details);
             repository.save(userDetails);
             return userDetails;
         } else {
@@ -41,7 +41,7 @@ public class userServiceImpl implements userService {
 
 
 
-    private UserDetails copy(UserDetails target, UserDetails source){
+    private UserDetails copyFields(UserDetails target, UserDetails source){
         target.setUserRole(source.getUserRole());
         target.setUserId(source.getUserId());
         target.setEmail(source.getEmail());
