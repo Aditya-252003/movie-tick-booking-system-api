@@ -1,6 +1,6 @@
 package com.example.mtbs.enitity;
 
-import com.example.mtbs.enums.userRole;
+import com.example.mtbs.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +22,7 @@ public class UserDetails {
     private String password;
     private String phoneNumber;
     @Enumerated(value = EnumType.STRING)
-    private userRole userRole;
+    private UserRole userRole;
     private LocalDate dateOfBirth;
     private Long createdAt;
     private Long updatedAt;
