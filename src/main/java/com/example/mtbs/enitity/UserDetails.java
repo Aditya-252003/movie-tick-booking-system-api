@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,6 +25,8 @@ public class UserDetails {
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
     private LocalDate dateOfBirth;
+    private boolean isDelete;
+    private Instant deletedAt;
     private Long createdAt;
     private Long updatedAt;
 

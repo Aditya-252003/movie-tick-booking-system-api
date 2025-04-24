@@ -2,16 +2,15 @@ package com.example.mtbs.service;
 
 
 import com.example.mtbs.dto.UserRegistrationRequest;
-import com.example.mtbs.dto.UserRequest;
 import com.example.mtbs.dto.UserResponse;
+import com.example.mtbs.dto.UserUpdationRequest;
 
 public interface UserService {
     UserResponse registerUser(UserRegistrationRequest registrationRequest);
 
-    UserResponse updateUserProfile(String email, UserRequest request);
+    UserResponse updateUser(UserUpdationRequest user, String email);
 
-
-//    UserDetails addUser(UserDetails details);
+    UserResponse softDeleteUser(String email);
 
 }
 
