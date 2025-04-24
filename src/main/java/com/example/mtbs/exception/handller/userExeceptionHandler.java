@@ -1,5 +1,6 @@
-package com.example.mtbs.exception;
+package com.example.mtbs.exception.handller;
 
+import com.example.mtbs.exception.UserExistsByEmailException;
 import com.example.mtbs.util.ErrorStructure;
 import com.example.mtbs.util.RestResponseBuilder;
 import lombok.AllArgsConstructor;

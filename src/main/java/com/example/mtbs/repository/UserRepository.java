@@ -3,7 +3,9 @@ package com.example.mtbs.repository;
 import com.example.mtbs.enitity.UserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface userRepository extends JpaRepository<UserDetails, String>{
+public interface UserRepository extends JpaRepository<UserDetails, Long>{
 
     boolean existsByEmail(String email);
+
+    UserDetails findByEmail(String email);
 }
