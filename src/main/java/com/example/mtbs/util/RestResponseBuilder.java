@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RestResponseBuilder{
+public class RestResponseBuilder {
 
     public <T> ResponseEntity<ResponseStructure<T>> success(HttpStatus statusCode, String message, T data) {
         ResponseStructure<T> responseStructure = ResponseStructure.<T>builder().statusCode(statusCode.value()).message(message).data(data)
@@ -14,10 +14,11 @@ public class RestResponseBuilder{
         return ResponseEntity.status(statusCode).body(responseStructure);
     }
 
-    public ResponseEntity<ErrorStructure> error(HttpStatus statusCode, String message){
-        return ResponseEntity.status(statusCode).body(ErrorStructure.builder()
+    public <T> ResponseEntity<ErrorStructure<T>> error(HttpStatus statusCode, String message, T error) {
+        return ResponseEntity.status(statusCode).body(ErrorStructure.<T>builder()
                 .statusCode(statusCode.value())
                 .errorMessage(message)
+                .error(error)
                 .build());
     }
 }

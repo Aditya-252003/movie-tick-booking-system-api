@@ -16,9 +16,9 @@ public class UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-   private String userId;
-   private String username;
-   @Column(unique = true)
+    private String userId;
+    private String username;
+    @Column(unique = true)
     private String email;
     private String password;
     private String phoneNumber;

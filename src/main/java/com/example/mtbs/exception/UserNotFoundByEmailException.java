@@ -3,11 +3,11 @@ package com.example.mtbs.exception;
 import lombok.Getter;
 
 @Getter
-public class UserExistsByEmailException {
+public class UserNotFoundByEmailException {
 
     private String message;
 
-    public UserExistsByEmailException(String message) {
+    public UserNotFoundByEmailException(String message) {
         this.message = message;
     }
 }
