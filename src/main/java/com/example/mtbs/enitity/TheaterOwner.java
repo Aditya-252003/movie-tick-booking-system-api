@@ -10,13 +10,7 @@ import java.util.List;
 @Entity
 public class TheaterOwner extends UserDetails {
 
-    private String email;
-
     @OneToMany(mappedBy = "theaterOwner" , cascade = CascadeType.ALL)
-    private List<Theater> theaters = new ArrayList<>();
+    private List<Theater> theaters;
 
-
-    public void addTheater (Theater theater){
-        theater.setTheaterOwner(this);
-    }
 }

@@ -28,7 +28,7 @@ public class TheaterMapper {
         return theater;
     }
 
-    public void toEntity(TheaterRequest source, Theater target) {
+    public void toEntityUpdate(TheaterRequest source, Theater target) {
         target.setName(source.name());
         target.setAddress(source.address());
         target.setCity(source.city());

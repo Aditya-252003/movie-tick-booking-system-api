@@ -12,8 +12,6 @@ import com.example.mtbs.service.TheaterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 @AllArgsConstructor
 public class TheaterServiceimpl implements TheaterService {
@@ -52,7 +50,7 @@ public class TheaterServiceimpl implements TheaterService {
             Theater theater = theaterRepository.findById(theaterId)
                     .orElseThrow(() -> new IllegalArgumentException("Theater Not found by Id"));
 
-        theaterMapper.toEntity(registerationRequest, theater);
+        theaterMapper.toEntityUpdate(registerationRequest, theater);
             theaterRepository.save(theater);
             return theaterMapper.toTheaterResponse(theater);
     }
