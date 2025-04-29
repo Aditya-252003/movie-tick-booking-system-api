@@ -4,6 +4,8 @@ import com.example.mtbs.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class UserDetails {
 
     @Id
@@ -27,7 +30,10 @@ public class UserDetails {
     private LocalDate dateOfBirth;
     private boolean isDelete;
     private Instant deletedAt;
-    private Long createdAt;
-    private Long updatedAt;
+
+    @CreatedDate
+    private Instant createdAt;
+    @CreatedDate
+    private Instant updatedAt;
 
 }

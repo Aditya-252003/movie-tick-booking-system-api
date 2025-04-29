@@ -34,7 +34,6 @@ public class ScreenMapper {
     }
 
     public List<SeatsResponse> seatResponseMapper(List<Seat> seats) {
-        System.out.println(seats);
         List<SeatsResponse> seatsResponses = new LinkedList<>();
         for (Seat seat : seats) {
             seatsResponses.add(
