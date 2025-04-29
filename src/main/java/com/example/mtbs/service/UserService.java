@@ -1,9 +1,8 @@
 package com.example.mtbs.service;
 
 
-import com.example.mtbs.dto.UserRegistrationRequest;
-import com.example.mtbs.dto.UserResponse;
-import com.example.mtbs.dto.UserUpdationRequest;
+import com.example.mtbs.dto.*;
+import jakarta.validation.Valid;
 
 public interface UserService {
     UserResponse registerUser(UserRegistrationRequest registrationRequest);
