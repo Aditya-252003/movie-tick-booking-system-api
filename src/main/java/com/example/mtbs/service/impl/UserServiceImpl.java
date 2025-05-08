@@ -86,6 +86,11 @@ public class UserServiceImpl implements UserService {
         throw new IllegalArgumentException("Email not found in the Database");
     }
 
+    @Override
+    public UserDetails findByemail(String email) {
+        return null;
+    }
+
     private UserDetails copyFields(UserDetails userRole, UserRegistrationRequest user) {
         userRole.setUserRole(user.userRole());
         userRole.setPassword(user.password());

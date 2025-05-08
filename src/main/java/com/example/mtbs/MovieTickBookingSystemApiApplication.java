@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableJpaAuditing(auditorAwareRef = "auditAwareimpl")
+@EnableJpaAuditing(auditorAwareRef = "auditorAwareImpl")
 public class MovieTickBookingSystemApiApplication {
 
 	public static void main(String[] args) {
