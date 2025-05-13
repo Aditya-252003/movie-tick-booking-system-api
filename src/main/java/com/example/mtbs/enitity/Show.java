@@ -14,6 +14,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "movie_show")
 public class Show {
 
     @Id
