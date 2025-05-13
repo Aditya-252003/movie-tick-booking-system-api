@@ -1,12 +1,15 @@
 package com.example.mtbs.enums;
 
 public enum Genre {
+
     ACTION,
-    DRAMA,
     COMEDY,
-    THRILLER,
+    DRAMA,
     HORROR,
     ROMANCE,
-    SCI_FI,
+    SCIENCE_FICTION,
+    THRILLER,
+    ANIMATION,
     DOCUMENTARY
+
 }

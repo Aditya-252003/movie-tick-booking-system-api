@@ -3,13 +3,16 @@ package com.example.mtbs.service.impl;
 import com.example.mtbs.dto.AuthResponse;
 import com.example.mtbs.dto.LoginRequest;
 import com.example.mtbs.enitity.UserDetails;
+import com.example.mtbs.enums.TokenType;
 import com.example.mtbs.mapper.AuthMapper;
 import com.example.mtbs.repository.UserRepository;
 import com.example.mtbs.security.SecurityConfig;
+import com.example.mtbs.security.jwt.AuthenticatedTokenDetails;
 import com.example.mtbs.security.jwt.JwtService;
 import com.example.mtbs.security.jwt.TokenPayLoad;
 import com.example.mtbs.service.AuthService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +25,7 @@ import java.util.Map;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AuthServiceImpl implements AuthService {
 
     private final SecurityConfig securityConfig;
@@ -42,8 +46,8 @@ public class AuthServiceImpl implements AuthService {
 
         UserDetails userDetails = userRepository.findByEmail(authentication.getName());
 
-        TokenPayLoad access = tokenGenerator(userDetails, 5 );
-        TokenPayLoad refresh = tokenGenerator(userDetails, 24*60 );
+        TokenPayLoad access = tokenGenerator(userDetails, 5 ,TokenType.ACCESS);
+        TokenPayLoad refresh = tokenGenerator(userDetails, 24*60 , TokenType.REFRESH);
 
         String accessToken = jwtService.createJwtToken(access);
         String refreshToken = jwtService.createJwtToken(refresh);
@@ -51,17 +55,39 @@ public class AuthServiceImpl implements AuthService {
         return authMapper.authResponseMapper(userDetails,access ,refresh ,accessToken , refreshToken);
     }
 
-    private TokenPayLoad tokenGenerator(UserDetails userDetails, int minutesForExpiration){
+    @Override
+    public AuthResponse refresh(AuthenticatedTokenDetails details) {
+
+        UserDetails userDetails = userRepository.findByEmail(details.email());
+
+        TokenPayLoad generator = tokenGenerator(userDetails,5,TokenType.ACCESS);
+        String access = jwtService.createJwtToken(generator);
+
+        return new AuthResponse(userDetails.getUserId(),
+                userDetails.getUsername(),
+                details.email(),
+                details.role(),
+                generator.expiration().toEpochMilli(),
+                details.tokenExpiration().toEpochMilli(),
+                access,
+                details.currentToken());
+    }
+
+    private TokenPayLoad tokenGenerator(UserDetails userDetails, int minutesForExpiration, TokenType tokenType ){
         Map<String, Object> claims = new HashMap<>();
 
         String role = userDetails.getUserRole().toString();
         claims.put("role", role);
 
+        log.info("Fetched role");
+
         return new TokenPayLoad(
                 claims,
                 userDetails.getEmail(),
                 Instant.now(),
-                Instant.now().plusSeconds(minutesForExpiration*60)
+                Instant.now().plusSeconds(minutesForExpiration*60),
+                tokenType
+
         );
     }
 }

@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 public class AuthMapper {
 
     public AuthResponse authResponseMapper(UserDetails details,
-                                           TokenPayLoad accessToken,
-                                           TokenPayLoad refreshToken
-                                          , String access,
-                                           String refresh) {
+                                           TokenPayLoad access,
+                                           TokenPayLoad refresh
+                                          , String accessToken,
+                                           String refreshToken) {
         return AuthResponse.builder()
                 .userId(details.getUserId())
                 .username(details.getUsername())
                 .email(details.getEmail())
-                .role(details.getUserRole())
-                .accesExpiration(accessToken.expiration().toEpochMilli())
-                .refreshExpiration(refreshToken.expiration().toEpochMilli())
+                .role(String.valueOf(details.getUserRole()))
+                .accesExpiration(access.expiration().toEpochMilli())
+                .refreshExpiration(refresh.expiration().toEpochMilli())
                 .accessToken(accessToken)
                 .refreshtoken(refreshToken)
                 .build();
